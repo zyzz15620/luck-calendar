@@ -5,27 +5,43 @@
     <style>
         .calendar-container {
             display: flex;
-            flex-direction: row;
-            justify-content: space-between;
+            flex-direction: column;
         }
-        .day-column {
+        .hour-row {
+            display: flex;
+            flex-direction: row;
+            align-items: stretch; /* Căn chỉnh các khung giờ và cột ngày cho cùng chiều cao */
+        }
+        .hour-column, .day-column {
             flex: 1;
             margin: 10px;
         }
-        .hour-box {
+        .hour-box, .day-box {
             padding: 10px;
             margin: 5px;
             border-radius: 5px;
             text-align: center;
+            min-height: 100px; /* Đảm bảo chiều cao tối thiểu để các khung tương xứng */
         }
         .green { background-color: green; color: white; }
         .yellow { background-color: yellow; color: black; }
         .red { background-color: red; color: white; }
+        .centered {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<h1>Luck Calendar</h1>
-<h2>Tháng: <span th:text="${calendar[0].month}"></span></h2> <!-- Hiển thị số tháng -->
+<h1 class="centered">Luck Calendar</h1>
+<h2 class="centered">Tháng: <span th:text="${calendar[0].month}"></span></h2>
+
+<!-- Nút điều hướng -->
+<div class="centered">
+    <a th:href="@{/calendar(days=${days}, startDay=${startDate}, month=${calendar[0].month}, offset=${offset - 1})}">&larr;</a>
+    <span th:text="${startDate} + ' - ' + ${endDate}"></span>
+    <a th:href="@{/calendar(days=${days}, startDay=${startDate}, month=${calendar[0].month}, offset=${offset + 1})}">&rarr;</a>
+</div>
+
 <div>
     <form method="get" action="/calendar">
         <label for="days">Select days:</label>
@@ -35,13 +51,26 @@
         <button type="submit">Update</button>
     </form>
 </div>
+
+<!-- Cột giờ ngoài cùng bên trái -->
 <div class="calendar-container">
-    <div th:each="dayLuck : ${calendar}" class="day-column">
-        <h2><span th:text="${dayLuck.dayOfWeek}"></span> ngày <span th:text="${dayLuck.formattedDate}"></span></h2>
-        <div th:each="timeLuck : ${dayLuck.timeLuckList}" th:classappend="${timeLuck.color}">
-            <div class="hour-box" th:class="'hour-box ' + ${timeLuck.color}">
-                <strong>Hour:</strong> <span th:text="${timeLuck.getFormattedTime()}"></span><br>
-                <span th:text="${timeLuck.detailedInfo}"></span>
+    <div class="hour-row">
+        <div class="hour-column">
+            <h2>Giờ</h2>
+            <div th:each="timeLuck : ${calendar[0].timeLuckList}">
+                <div class="hour-box">
+                    <strong><span th:text="${timeLuck.getFormattedTime()}"></span></strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Các cột ngày -->
+        <div th:each="dayLuck : ${calendar}" class="day-column">
+            <h2>T<span th:text="${dayLuck.dayOfWeek.substring(4)}"></span> <span th:text="${dayLuck.formattedDate}"></span></h2>
+            <div th:each="timeLuck : ${dayLuck.timeLuckList}" th:classappend="${timeLuck.color}">
+                <div class="day-box" th:class="'hour-box ' + ${timeLuck.color}">
+                    <span th:text="${timeLuck.detailedInfo}"></span>
+                </div>
             </div>
         </div>
     </div>
