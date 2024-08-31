@@ -3,10 +3,7 @@ package com.luckdays;
 public class LuckCalculator {
     final static String[] statusArray = {"Đại An", "Lưu Niên", "Tốc Hỉ", "Xích Khẩu", "Tiểu Cát", "Không Vong"};
     public static int overallLuckScoreCalculator(int day, int month, int hour) {
-        int monthLuckScore = luckScore(getMonthStatus(month));
-        int dayLuckScore = luckScore(getDayStatus(day, month));
-        int timeLuckScore = luckScore(getTimeStatus(day, month, hour));
-        return monthLuckScore + dayLuckScore + timeLuckScore;
+        return luckScore(getMonthStatus(month)) + luckScore(getDayStatus(day, month)) + luckScore(getTimeStatus(day, month, hour));
     }
     private static int luckScore(String status) {
         if (status.equals("Đại An") || status.equals("Tốc Hỉ") || status.equals("Tiểu Cát")) {
@@ -41,17 +38,14 @@ public class LuckCalculator {
         }
     }
     public static String getDetailedLuckInfo(int day, int month, int hour) {
-        String monthStatus = getMonthStatus(month);
-        String dayStatus = getDayStatus(day, month);
-        String timeStatus = getTimeStatus(day, month, hour);
         int overallScore = overallLuckScoreCalculator(day, month, hour);
-        String luckColor = getLuckColor(overallScore);
-        return "Month Status: " + monthStatus +
-                ", Day Status: " + dayStatus +
-                ", Time Status: " + timeStatus +
+        return "Month Status: " + getMonthStatus(month) +
+                ", Day Status: " + getDayStatus(day, month) +
+                ", Time Status: " + getTimeStatus(day, month, hour) +
                 ", Overall Score: " + overallScore +
-                ", Luck Color: " + luckColor;
+                ", Luck Color: " + getLuckColor(overallScore);
     }
+
     public static String printWeeklyLuck(int startDay, int month) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < 7; i++) {
