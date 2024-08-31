@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Luck Calendar</title>
+    <style>
+        .hour-box {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .green { background-color: green; color: white; }
+        .yellow { background-color: yellow; color: black; }
+        .red { background-color: red; color: white; }
+    </style>
+</head>
+<body>
+<h1>Luck Calendar</h1>
+<div>
+    <form method="get" action="/calendar">
+        <label for="days">Select days:</label>
+        <select name="days" id="days">
+            <option value="7">7 Days</option>
+            <option value="30">30 Days</option>
+        </select>
+        <button type="submit">Update</button>
+    </form>
+</div>
+<div>
+    <div th:each="dayLuck : ${calendar}">
+        <h2>Day: <span th:text="${dayLuck.day}"></span></h2>
+        <div th:each="timeLuck : ${dayLuck.timeLuckList}" th:classappend="${timeLuck.color}">
+            <div class="hour-box" th:class="'hour-box ' + ${timeLuck.color}">
+                <strong>Hour:</strong> <span th:text="${timeLuck.hour}"></span><br>
+                <span th:text="${timeLuck.detailedInfo}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
