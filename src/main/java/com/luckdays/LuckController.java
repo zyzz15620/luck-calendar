@@ -1,6 +1,5 @@
 package com.luckdays;
 
-import com.luckdays.DayLuck;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,22 +12,21 @@ import java.util.List;
 
 @Controller
 public class LuckController {
+
     @GetMapping("/calendar")
     public String getCalendar(@RequestParam(defaultValue = "7") int days,
-                              @RequestParam(defaultValue = "1") int startDay,
-                              @RequestParam(defaultValue = "9") int month,
                               @RequestParam(defaultValue = "0") int offset,
                               Model model) {
-        LocalDate startDate = LocalDate.of(LocalDate.now().getYear(), month, startDay).plusDays(offset * days);
+
+        LocalDate baseDate = LocalDate.now();
+        LocalDate startDate = baseDate.plusDays((long) offset * days);
         LocalDate endDate = startDate.plusDays(days - 1);
 
         String formattedStartDate = startDate.format(DateTimeFormatter.ofPattern("dd/MM"));
         String formattedEndDate = endDate.format(DateTimeFormatter.ofPattern("dd/MM"));
 
-        int currentStartDay = startDate.getDayOfMonth();
-        int currentMonth = startDate.getMonthValue();
+        List<DayLuck> calendar = generateCalendar(days, startDate.getDayOfMonth(), startDate.getMonthValue());
 
-        List<DayLuck> calendar = generateCalendar(days, currentStartDay, currentMonth);
         model.addAttribute("calendar", calendar);
         model.addAttribute("startDate", formattedStartDate);
         model.addAttribute("endDate", formattedEndDate);
@@ -41,9 +39,23 @@ public class LuckController {
         List<DayLuck> calendar = new ArrayList<>();
         for (int i = 0; i < days; i++) {
             LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, startDay).plusDays(i);
-            DayLuck dayLuck = new DayLuck(date.getDayOfMonth(), date.getMonthValue());
+            String dayOfWeek = getDayOfWeek(date);
+            DayLuck dayLuck = new DayLuck(date.getDayOfMonth(), date.getMonthValue(), dayOfWeek);
             calendar.add(dayLuck);
         }
         return calendar;
+    }
+
+    private String getDayOfWeek(LocalDate date) {
+        return switch (date.getDayOfWeek()) {
+            case MONDAY -> "T2";
+            case TUESDAY -> "T3";
+            case WEDNESDAY -> "T4";
+            case THURSDAY -> "T5";
+            case FRIDAY -> "T6";
+            case SATURDAY -> "T7";
+            case SUNDAY -> "CN";
+            default -> "";
+        };
     }
 }

@@ -13,8 +13,12 @@ public class TimeLuck {
         this.color = color;
     }
 
-    public String getFormattedTime() {
-        return String.format("%02d:00 - %02d:00", startHour, endHour);
+    public int getStartHour() {
+        return startHour;
+    }
+
+    public int getEndHour() {
+        return endHour;
     }
 
     public String getDetailedInfo() {
@@ -23,5 +27,9 @@ public class TimeLuck {
 
     public String getColor() {
         return color;
+    }
+
+    public String getFormattedTime() {
+        return String.format("%02d:00 - %02d:00", startHour, endHour);
     }
 }
