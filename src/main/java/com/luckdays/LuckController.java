@@ -1,10 +1,14 @@
 package com.luckdays;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +16,8 @@ import java.util.List;
 
 @Controller
 public class LuckController {
+    @Value("classpath:tooltip.txt")
+    private org.springframework.core.io.Resource tooltipFile;
 
     @GetMapping("/calendar")
     public String getCalendar(@RequestParam(defaultValue = "7") int days,
@@ -38,6 +44,14 @@ public class LuckController {
             dayLuck.setLunarMonth(lunarDate[1]);
         }
 
+        String tooltipText = "";
+        try {
+            tooltipText = new String(Files.readAllBytes(Paths.get(tooltipFile.getURI())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("tooltipText", tooltipText);
         model.addAttribute("calendar", calendar);
         model.addAttribute("startDate", formattedStartDate);
         model.addAttribute("endDate", formattedEndDate);

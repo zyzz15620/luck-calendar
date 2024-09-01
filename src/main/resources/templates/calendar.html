@@ -2,81 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Luck Calendar</title>
-    <style>
-        /* Cấu trúc hiện tại */
-
-        .calendar-container {
-            display: flex;
-            flex-direction: column;
-        }
-        .hour-row {
-            display: flex;
-            flex-direction: row;
-            align-items: stretch;
-        }
-        .hour-column, .day-column {
-            flex: 1;
-            margin: 10px;
-        }
-        .hour-box, .day-box {
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
-            text-align: center;
-            min-height: 100px;
-        }
-        .green { background-color: green; color: white; }
-        .yellow { background-color: yellow; color: black; }
-        .red { background-color: red; color: white; }
-        .centered {
-            text-align: center;
-        }
-        h3, h4, p {
-            font-size: 16px;
-            margin: 5px 0;
-            text-align: center;
-        }
-        .bold {
-            font-weight: bold;
-        }
-
-        /* Cấu trúc cho dấu chấm than và chú thích */
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            float: right;
-            margin-right: 20px;
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 200px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            padding: 5px;
-            position: absolute;
-            z-index: 1;
-            top: -5px;
-            right: 105%;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
 <!-- Dấu chấm than với tooltip -->
 <div class="tooltip">!
-    <span class="tooltiptext">Meow Meow Meow rửa mặt như mèo.</span>
+    <span class="tooltiptext" th:text="${tooltipText}"></span>
 </div>
 
 <h1 class="centered">Luck Calendar</h1>
