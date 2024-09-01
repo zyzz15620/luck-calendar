@@ -7,9 +7,9 @@
 
 /* Định dạng chung */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    padding: 30px;
 }
 
 .centered {
@@ -18,42 +18,44 @@ body {
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 48px;
     color: #343a40;
+    margin-bottom: 10px;
 }
 
 h2 {
+    font-size: 28px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.header {
+    margin-bottom: 40px;
+}
+
+.navigation {
+    margin-bottom: 40px;
+}
+
+.nav-arrow {
     font-size: 24px;
-    color: #6c757d;
-    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 20px;
 }
 
-h3, h4 {
-    font-size: 18px;
-    margin: 10px 0;
-    text-align: center;
-    color: #495057;
-}
-
-p {
-    font-size: 14px;
-    color: #6c757d;
-    margin: 5px 0;
-    text-align: center;
-}
-
-.bold {
-    font-weight: bold;
+.nav-arrow:hover {
+    text-decoration: underline;
 }
 
 /* Tooltip */
 .tooltip {
-    position: relative;
+    position: absolute;
+    top: 20px;
+    right: 30px;
     display: inline-block;
     cursor: pointer;
-    float: right;
-    margin-right: 20px;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: #17a2b8;
 }
@@ -82,27 +84,45 @@ p {
 }
 
 /* Định dạng bảng */
-/* CSS đã dùng trước đó */
+.table-container {
+    overflow-x: auto;
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
 .calendar-table th, .calendar-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    border: 1px solid #dee2e6;
+    padding: 15px;
     text-align: center;
 }
 
 .calendar-table th {
-    background-color: #f8f9fa;
+    background-color: #007bff;
+    color: white;
     font-weight: bold;
+    text-transform: uppercase;
 }
 
 .calendar-table td {
     background-color: #fff;
+    transition: background-color 0.3s ease;
 }
 
 .day-box {
-    background-color: #f8f9fa;
-    padding: 10px;
+    padding: 15px;
     border-radius: 5px;
-    min-height: 60px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #343a40;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .green {
@@ -120,3 +140,6 @@ p {
     color: white;
 }
 
+.calendar-table td:hover .day-box {
+    background-color: rgba(0, 0, 0, 0.05);
+}
