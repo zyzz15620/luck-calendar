@@ -38,9 +38,9 @@
     <tbody>
     <tr th:each="timeIndex : ${#numbers.sequence(0, 11)}">
         <td th:text="${calendar[0].timeLuckList[timeIndex].formattedTime}"></td>
-        <td th:each="dayLuck : ${calendar}" th:classappend="${dayLuck.timeLuckList[timeIndex].color}">
+        <td th:each="dayLuck : ${calendar}" th:style="'background-color: ' + ${dayLuck.timeLuckList[timeIndex].color}">
             <div class="day-box">
-                <span th:text="${dayLuck.timeLuckList[timeIndex].detailedInfo}"></span>
+                <span th:utext="${dayLuck.timeLuckList[timeIndex].detailedInfo}"></span>
             </div>
         </td>
     </tr>

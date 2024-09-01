@@ -11,12 +11,23 @@ public class LuckCalculator {
     }
 
     private static int luckScore(String status) {
-        if (status.equals("Đại An") || status.equals("Tốc Hỉ") || status.equals("Tiểu Cát")) {
-            return 1;
-        } else {
-            return -1;
+        switch (status) {
+            case "Đại An":
+                return 3;
+            case "Tốc Hỉ":
+                return 2;
+            case "Tiểu Cát":
+            case "Lưu Niên":
+                return 1;
+            case "Xích Khẩu":
+                return -2;
+            case "Không Vong":
+                return -3;
+            default:
+                return 0;
         }
     }
+
 
     private static String getMonthStatus(int month) {
         return statusArray[(month - 1) % 6];
@@ -35,12 +46,20 @@ public class LuckCalculator {
     }
 
     public static String getLuckColor(int overallScore) {
-        if (overallScore > 2) {
-            return "Green";
-        } else if (overallScore == 2) {
-            return "Yellow";
+        if (overallScore >= 7) {
+            return "#006400"; // Rất may mắn - Màu xanh lá đậm
+        } else if (overallScore >= 4) {
+            return "#32CD32"; // May mắn - Màu xanh lá
+        } else if (overallScore >= 1) {
+            return "#ADFF2F"; // Hơi may mắn - Màu xanh lá nhạt
+        } else if (overallScore == 0) {
+            return "#FFD700"; // Bình thường, cân bằng - Màu vàng
+        } else if (overallScore >= -3) {
+            return "#FF6347"; // Hơi xui xẻo - Màu đỏ nhạt
+        } else if (overallScore >= -6) {
+            return "#FF4500"; // Xui xẻo - Màu đỏ
         } else {
-            return "Red";
+            return "#B22222"; // Rất xui xẻo - Màu đỏ đậm
         }
     }
 
@@ -50,10 +69,10 @@ public class LuckCalculator {
         String timeStatus = getTimeStatus(day, month, hour);
         int overallScore = overallLuckScoreCalculator(day, month, hour);
         String luckColor = getLuckColor(overallScore);
-        return "Month Status: " + monthStatus +
-                ", Day Status: " + dayStatus +
-                ", Time Status: " + timeStatus +
-                ", Overall Score: " + overallScore +
-                ", Luck Color: " + luckColor;
+        return "Tháng: " + monthStatus +
+                "<br> Ngày: " + dayStatus +
+                "<br> Giờ: " + timeStatus +
+                "<br> Overall Score: " + overallScore;
+//                "<br> Luck Color: " + luckColor;
     }
 }
