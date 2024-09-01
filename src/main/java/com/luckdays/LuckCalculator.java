@@ -47,19 +47,19 @@ public class LuckCalculator {
 
     public static String getLuckColor(int overallScore) {
         if (overallScore >= 7) {
-            return "#228B22"; // Rất may mắn - Màu xanh lá đậm
+            return "#008080"; // Rất may mắn - Màu xanh teal
         } else if (overallScore >= 4) {
-            return "#3CB371"; // May mắn - Màu xanh lá
+            return "#32CD32"; // May mắn - Màu xanh lá vừa
         } else if (overallScore >= 1) {
-            return "#90EE90"; // Hơi may mắn - Màu xanh lá nhạt
+            return "#98FB98"; // Hơi may mắn - Màu xanh bạc hà
         } else if (overallScore == 0) {
-            return "#F0E68C"; // Bình thường, cân bằng - Màu vàng
+            return "#F0E68C"; // Bình thường, cân bằng - Màu vàng nhạt
         } else if (overallScore >= -3) {
-            return "#FF7F7F"; // Hơi xui xẻo - Màu đỏ nhạt
+            return "#FFB6C1"; // Hơi xui xẻo - Màu hồng đào
         } else if (overallScore >= -6) {
-            return "#DC143C"; // Xui xẻo - Màu đỏ
+            return "#FF6347"; // Xui xẻo - Màu đỏ cam
         } else {
-            return "#8B0000"; // Rất xui xẻo - Màu đỏ đậm
+            return "#A52A2A"; // Rất xui xẻo - Màu đỏ xám
         }
     }
 

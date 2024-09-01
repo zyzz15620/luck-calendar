@@ -8,7 +8,7 @@
 /* Định dạng chung */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #f0f0f0; /* Nền xám nhẹ */
     padding: 30px;
 }
 
@@ -93,6 +93,7 @@ h2 {
     border-collapse: collapse;
     margin: 0 auto;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Nền trắng cho bảng */
 }
 
 .calendar-table th, .calendar-table td {
@@ -102,14 +103,14 @@ h2 {
 }
 
 .calendar-table th {
-    background-color: #007bff;
+    background-color: #5a9bd3; /* Màu xanh nhạt hơn */
     color: white;
     font-weight: bold;
     text-transform: uppercase;
 }
 
 .calendar-table td {
-    background-color: #fff;
+    background-color: #f8f9fa; /* Màu xám nhạt cho ô bảng */
     transition: background-color 0.3s ease;
 }
 
@@ -125,20 +126,7 @@ h2 {
     font-size: 16px;
 }
 
-.green {
-    background-color: #28a745;
-    color: white;
-}
 
-.yellow {
-    background-color: #ffc107;
-    color: black;
-}
-
-.red {
-    background-color: #dc3545;
-    color: white;
-}
 
 .calendar-table td:hover .day-box {
     background-color: rgba(0, 0, 0, 0.05);
