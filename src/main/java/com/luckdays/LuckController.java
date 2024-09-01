@@ -1,6 +1,7 @@
 package com.luckdays;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,10 +47,12 @@ public class LuckController {
 
         String tooltipText = "";
         try {
-            tooltipText = new String(Files.readAllBytes(Paths.get(tooltipFile.getURI())));
+            ClassPathResource resource = new ClassPathResource("tooltip.txt");
+            tooltipText = new String(Files.readAllBytes(resource.getFile().toPath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         model.addAttribute("tooltipText", tooltipText);
         model.addAttribute("calendar", calendar);
