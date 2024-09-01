@@ -5,48 +5,46 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
 <body>
-<!-- Dấu chấm than với tooltip -->
+<!-- Tooltip -->
 <div class="tooltip">!
     <span class="tooltiptext" th:text="${tooltipText}"></span>
 </div>
 
+<!-- Tiêu đề -->
 <h1 class="centered">Luck Calendar</h1>
 <h2 class="centered">Tháng: <span th:text="${calendar[0].month}"></span>/<span th:text="${calendar[0].year}"></span></h2>
 
+<!-- Điều hướng -->
 <div class="centered">
     <a th:href="@{/calendar(days=${days}, offset=${offset - 1})}">&larr;</a>
     <span th:text="${startDate} + ' - ' + ${endDate}"></span>
     <a th:href="@{/calendar(days=${days}, offset=${offset + 1})}">&rarr;</a>
 </div>
 
-<div class="calendar-container">
-    <div class="hour-row">
-        <div class="hour-column">
-            <h2>Giờ</h2>
-            <div th:each="timeLuck : ${calendar[0].timeLuckList}">
-                <div class="hour-box">
-                    <strong><span th:text="${timeLuck.getFormattedTime()}"></span></strong>
-                </div>
+<!-- Bảng lịch -->
+<table class="calendar-table">
+    <!-- Header -->
+    <thead>
+    <tr>
+        <th>Giờ</th>
+        <th th:each="dayLuck, iter : ${calendar}">
+            <span th:text="${dayLuck.dayOfWeek}"></span><br>
+            <span th:text="${dayLuck.day + '/' + dayLuck.month}"></span><br>
+            <span>Âm lịch:</span> <span th:text="${lunarDates[iter.index]}"></span>/<span th:text="${calendar[0].year}"></span>
+        </th>
+    </tr>
+    </thead>
+    <!-- Body -->
+    <tbody>
+    <tr th:each="timeIndex : ${#numbers.sequence(0, 11)}">
+        <td th:text="${calendar[0].timeLuckList[timeIndex].formattedTime}"></td>
+        <td th:each="dayLuck : ${calendar}" th:classappend="${dayLuck.timeLuckList[timeIndex].color}">
+            <div class="day-box">
+                <span th:text="${dayLuck.timeLuckList[timeIndex].detailedInfo}"></span>
             </div>
-        </div>
-
-        <!-- Các cột ngày -->
-        <div th:each="dayLuck, iter : ${calendar}" class="day-column">
-            <!-- Thứ -->
-            <h3 class="bold"><span th:text="${dayLuck.dayOfWeek}"></span></h3>
-            <!-- Ngày dương lịch -->
-            <h4 class="bold"><span th:text="${dayLuck.day + '/' + dayLuck.month}"></span></h4>
-            <!-- Ngày âm lịch -->
-            <p>Âm lịch: <span th:text="${lunarDates[iter.index]}"></span></p>
-
-            <div th:each="timeLuck : ${dayLuck.timeLuckList}" th:classappend="${timeLuck.color}">
-                <div class="day-box" th:class="'hour-box ' + ${timeLuck.color}">
-                    <span th:text="${timeLuck.detailedInfo}"></span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

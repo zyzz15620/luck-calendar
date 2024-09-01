@@ -1,63 +1,16 @@
+/* Reset mặc định */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Định dạng chung */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
     padding: 20px;
 }
-
-.calendar-container {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-}
-
-.hour-row {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    border-bottom: 1px solid #ccc;
-}
-
-.hour-column, .day-column {
-    flex: 1;
-    margin: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.hour-box, .day-box {
-    padding: 15px;
-    margin: 5px;
-    border-radius: 5px;
-    text-align: center;
-    min-height: 100px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-}
-
-.hour-box {
-    background-color: #e9ecef;
-}
-
-.day-box {
-    background-color: #f8f9fa;
-    height: 100%;
-}
-
-.day-box:hover {
-    background-color: #f1f1f1;
-}
-
-.green { background-color: #28a745; color: white; }
-.yellow { background-color: #ffc107; color: black; }
-.red { background-color: #dc3545; color: white; }
 
 .centered {
     text-align: center;
@@ -93,6 +46,7 @@ p {
     font-weight: bold;
 }
 
+/* Tooltip */
 .tooltip {
     position: relative;
     display: inline-block;
@@ -126,3 +80,43 @@ p {
     visibility: visible;
     opacity: 1;
 }
+
+/* Định dạng bảng */
+/* CSS đã dùng trước đó */
+.calendar-table th, .calendar-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.calendar-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.calendar-table td {
+    background-color: #fff;
+}
+
+.day-box {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    min-height: 60px;
+}
+
+.green {
+    background-color: #28a745;
+    color: white;
+}
+
+.yellow {
+    background-color: #ffc107;
+    color: black;
+}
+
+.red {
+    background-color: #dc3545;
+    color: white;
+}
+
