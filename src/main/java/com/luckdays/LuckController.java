@@ -26,11 +26,20 @@ public class LuckController {
         String formattedEndDate = endDate.format(DateTimeFormatter.ofPattern("dd/MM"));
 
         List<DayLuck> calendar = generateCalendar(days, startDate.getDayOfMonth(), startDate.getMonthValue());
+        List<String> lunarDates = new ArrayList<>();
+
+        // Sử dụng LunarUtils để chuyển đổi và thêm ngày âm lịch vào danh sách
+        for (DayLuck dayLuck : calendar) {
+            int[] lunarDate = LunarUtils.convertSolar2Lunar(dayLuck.getDay(), dayLuck.getMonth(), LocalDate.now().getYear(), 7.0);
+            String lunarDateString = lunarDate[0] + "/" + lunarDate[1] + "/" + lunarDate[2];
+            lunarDates.add(lunarDateString);
+        }
 
         model.addAttribute("calendar", calendar);
         model.addAttribute("startDate", formattedStartDate);
         model.addAttribute("endDate", formattedEndDate);
         model.addAttribute("offset", offset);
+        model.addAttribute("lunarDates", lunarDates);
 
         return "calendar";
     }
