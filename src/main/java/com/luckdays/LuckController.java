@@ -20,6 +20,11 @@ public class LuckController {
     @Value("classpath:tooltip.txt")
     private org.springframework.core.io.Resource tooltipFile;
 
+    @GetMapping("/")
+    public String rootRedirect() {
+        return "redirect:/calendar";
+    }
+
     @GetMapping("/calendar")
     public String getCalendar(@RequestParam(defaultValue = "7") int days,
                               @RequestParam(defaultValue = "0") int offset,
