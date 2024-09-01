@@ -8,13 +8,15 @@ import java.util.List;
 public class DayLuck {
     private int day;
     private int month;
+    private int year;
     private String dayOfWeek;
     private String formattedDate;
     private List<TimeLuck> timeLuckList;
 
-    public DayLuck(int day, int month, String dayOfWeek) {
+    public DayLuck(int day, int month, int year, String dayOfWeek) {
         this.day = day;
         this.month = month;
+        this.year = year;
         this.dayOfWeek = dayOfWeek;
         LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, day);
         this.formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM"));
@@ -42,6 +44,10 @@ public class DayLuck {
 
     public int getMonth() {
         return month;
+    }
+
+    public int getYear() {
+        return year;
     }
 
     public String getDayOfWeek() {

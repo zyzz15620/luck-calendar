@@ -25,12 +25,11 @@ public class LuckController {
         String formattedStartDate = startDate.format(DateTimeFormatter.ofPattern("dd/MM"));
         String formattedEndDate = endDate.format(DateTimeFormatter.ofPattern("dd/MM"));
 
-        List<DayLuck> calendar = generateCalendar(days, startDate.getDayOfMonth(), startDate.getMonthValue());
+        List<DayLuck> calendar = generateCalendar(days, startDate.getDayOfMonth(), startDate.getMonthValue(), startDate.getYear());
         List<String> lunarDates = new ArrayList<>();
 
-        // Sử dụng LunarUtils để chuyển đổi và thêm ngày âm lịch vào danh sách
         for (DayLuck dayLuck : calendar) {
-            int[] lunarDate = LunarUtils.convertSolar2Lunar(dayLuck.getDay(), dayLuck.getMonth(), LocalDate.now().getYear(), 7.0);
+            int[] lunarDate = LunarUtils.convertSolar2Lunar(dayLuck.getDay(), dayLuck.getMonth(), dayLuck.getYear(), 7.0);
             String lunarDateString = lunarDate[0] + "/" + lunarDate[1] + "/" + lunarDate[2];
             lunarDates.add(lunarDateString);
         }
@@ -44,12 +43,12 @@ public class LuckController {
         return "calendar";
     }
 
-    private List<DayLuck> generateCalendar(int days, int startDay, int month) {
+    private List<DayLuck> generateCalendar(int days, int startDay, int month, int year) {
         List<DayLuck> calendar = new ArrayList<>();
         for (int i = 0; i < days; i++) {
-            LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, startDay).plusDays(i);
+            LocalDate date = LocalDate.of(year, month, startDay).plusDays(i);
             String dayOfWeek = getDayOfWeek(date);
-            DayLuck dayLuck = new DayLuck(date.getDayOfMonth(), date.getMonthValue(), dayOfWeek);
+            DayLuck dayLuck = new DayLuck(date.getDayOfMonth(), date.getMonthValue(), date.getYear(), dayOfWeek);
             calendar.add(dayLuck);
         }
         return calendar;

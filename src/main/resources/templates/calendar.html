@@ -29,16 +29,20 @@
         .centered {
             text-align: center;
         }
+        /* Đồng nhất kích thước văn bản */
         h3, h4, p {
             font-size: 16px;
             margin: 5px 0;
             text-align: center;
         }
+        .bold {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 <h1 class="centered">Luck Calendar</h1>
-<h2 class="centered">Tháng: <span th:text="${calendar[0].month}"></span></h2>
+<h2 class="centered">Tháng: <span th:text="${calendar[0].month}"></span>/<span th:text="${calendar[0].year}"></span></h2>
 
 <div class="centered">
     <a th:href="@{/calendar(days=${days}, offset=${offset - 1})}">&larr;</a>
@@ -60,11 +64,11 @@
         <!-- Các cột ngày -->
         <div th:each="dayLuck, iter : ${calendar}" class="day-column">
             <!-- Thứ -->
-            <h3><span th:text="${dayLuck.dayOfWeek}"></span></h3>
+            <h3 class="bold"><span th:text="${dayLuck.dayOfWeek}"></span></h3>
             <!-- Ngày dương lịch -->
-            <h4><span th:text="${dayLuck.day + '/' + dayLuck.month}"></span></h4>
+            <h4 class="bold"><span th:text="${dayLuck.day + '/' + dayLuck.month}"></span></h4>
             <!-- Ngày âm lịch -->
-            <p>Âm lịch: <span th:text="${lunarDates[iter.index]}"></span></p>
+            <p><span>Âm lịch:</span> <span th:text="${lunarDates[iter.index]}"></span></p>
 
             <div th:each="timeLuck : ${dayLuck.timeLuckList}" th:classappend="${timeLuck.color}">
                 <div class="day-box" th:class="'hour-box ' + ${timeLuck.color}">
@@ -72,6 +76,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
