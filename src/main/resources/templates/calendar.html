@@ -3,6 +3,8 @@
 <head>
     <title>Luck Calendar</title>
     <style>
+        /* Cấu trúc hiện tại */
+
         .calendar-container {
             display: flex;
             flex-direction: column;
@@ -29,7 +31,6 @@
         .centered {
             text-align: center;
         }
-        /* Đồng nhất kích thước văn bản */
         h3, h4, p {
             font-size: 16px;
             margin: 5px 0;
@@ -38,9 +39,46 @@
         .bold {
             font-weight: bold;
         }
+
+        /* Cấu trúc cho dấu chấm than và chú thích */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            float: right;
+            margin-right: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            top: -5px;
+            right: 105%;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
+<!-- Dấu chấm than với tooltip -->
+<div class="tooltip">!
+    <span class="tooltiptext">Meow Meow Meow rửa mặt như mèo.</span>
+</div>
+
 <h1 class="centered">Luck Calendar</h1>
 <h2 class="centered">Tháng: <span th:text="${calendar[0].month}"></span>/<span th:text="${calendar[0].year}"></span></h2>
 
@@ -68,7 +106,7 @@
             <!-- Ngày dương lịch -->
             <h4 class="bold"><span th:text="${dayLuck.day + '/' + dayLuck.month}"></span></h4>
             <!-- Ngày âm lịch -->
-            <p><span>Âm lịch:</span> <span th:text="${lunarDates[iter.index]}"></span></p>
+            <p>Âm lịch: <span th:text="${lunarDates[iter.index]}"></span></p>
 
             <div th:each="timeLuck : ${dayLuck.timeLuckList}" th:classappend="${timeLuck.color}">
                 <div class="day-box" th:class="'hour-box ' + ${timeLuck.color}">
@@ -76,7 +114,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
