@@ -82,7 +82,6 @@ public class LuckController {
             case FRIDAY -> "T6";
             case SATURDAY -> "T7";
             case SUNDAY -> "CN";
-            default -> "";
         };
     }
 }
