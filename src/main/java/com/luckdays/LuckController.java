@@ -30,8 +30,12 @@ public class LuckController {
 
         for (DayLuck dayLuck : calendar) {
             int[] lunarDate = LunarUtils.convertSolar2Lunar(dayLuck.getDay(), dayLuck.getMonth(), dayLuck.getYear(), 7.0);
-            String lunarDateString = lunarDate[0] + "/" + lunarDate[1] + "/" + lunarDate[2];
+            String lunarDateString = lunarDate[0] + "/" + lunarDate[1];
             lunarDates.add(lunarDateString);
+
+            // Cập nhật lunarDay và lunarMonth trong DayLuck
+            dayLuck.setLunarDay(lunarDate[0]);
+            dayLuck.setLunarMonth(lunarDate[1]);
         }
 
         model.addAttribute("calendar", calendar);
@@ -48,7 +52,8 @@ public class LuckController {
         for (int i = 0; i < days; i++) {
             LocalDate date = LocalDate.of(year, month, startDay).plusDays(i);
             String dayOfWeek = getDayOfWeek(date);
-            DayLuck dayLuck = new DayLuck(date.getDayOfMonth(), date.getMonthValue(), date.getYear(), dayOfWeek);
+            int[] lunarDate = LunarUtils.convertSolar2Lunar(date.getDayOfMonth(), date.getMonthValue(), date.getYear(), 7.0);
+            DayLuck dayLuck = new DayLuck(date.getDayOfMonth(), date.getMonthValue(), date.getYear(), lunarDate[0], lunarDate[1], dayOfWeek);
             calendar.add(dayLuck);
         }
         return calendar;

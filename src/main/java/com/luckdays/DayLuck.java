@@ -6,21 +6,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DayLuck {
-    private int day;
-    private int month;
-    private int year;
-    private String dayOfWeek;
-    private String formattedDate;
-    private List<TimeLuck> timeLuckList;
-
-    public DayLuck(int day, int month, int year, String dayOfWeek) {
+    private final int day;
+    private final int month;
+    private final int year;
+    private int lunarDay;
+    private int lunarMonth;
+    private final String dayOfWeek;
+    private final String formattedDate;
+    private final List<TimeLuck> timeLuckList;
+    public DayLuck(int day, int month, int year, int lunarDay, int lunarMonth, String dayOfWeek) {
         this.day = day;
         this.month = month;
         this.year = year;
+        this.lunarDay = lunarDay;
+        this.lunarMonth = lunarMonth;
         this.dayOfWeek = dayOfWeek;
-        LocalDate date = LocalDate.of(LocalDate.now().getYear(), month, day);
+        LocalDate date = LocalDate.of(year, month, day);
         this.formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM"));
         this.timeLuckList = generateTimeLuckList();
+    }
+
+    public void setLunarDay(int lunarDay) {
+        this.lunarDay = lunarDay;
+    }
+
+    public void setLunarMonth(int lunarMonth) {
+        this.lunarMonth = lunarMonth;
     }
 
     private List<TimeLuck> generateTimeLuckList() {
@@ -30,9 +41,10 @@ public class DayLuck {
         for (int i = 0; i < hours.length; i++) {
             int startHour = hours[i];
             int endHour = hours[(i + 1) % hours.length];
-            int overallScore = LuckCalculator.overallLuckScoreCalculator(day, month, startHour);
+            // Tính toán dựa trên ngày âm lịch
+            int overallScore = LuckCalculator.overallLuckScoreCalculator(lunarDay, lunarMonth, startHour);
             String color = LuckCalculator.getLuckColor(overallScore);
-            String detailedInfo = LuckCalculator.getDetailedLuckInfo(day, month, startHour);
+            String detailedInfo = LuckCalculator.getDetailedLuckInfo(lunarDay, lunarMonth, startHour);
             timeLuckList.add(new TimeLuck(startHour, endHour, detailedInfo, color));
         }
         return timeLuckList;
