@@ -14,6 +14,7 @@ public class DayLuck {
     private final String dayOfWeek;
     private final String formattedDate;
     private final List<TimeLuck> timeLuckList;
+
     public DayLuck(int day, int month, int year, int lunarDay, int lunarMonth, String dayOfWeek) {
         this.day = day;
         this.month = month;
@@ -21,8 +22,7 @@ public class DayLuck {
         this.lunarDay = lunarDay;
         this.lunarMonth = lunarMonth;
         this.dayOfWeek = dayOfWeek;
-        LocalDate date = LocalDate.of(year, month, day);
-        this.formattedDate = date.format(DateTimeFormatter.ofPattern("dd/MM"));
+        this.formattedDate = formatLocalDate(day, month, year);
         this.timeLuckList = generateTimeLuckList();
     }
 
@@ -34,14 +34,17 @@ public class DayLuck {
         this.lunarMonth = lunarMonth;
     }
 
+    private String formatLocalDate(int day, int month, int year) {
+        LocalDate date = LocalDate.of(year, month, day);
+        return date.format(DateTimeFormatter.ofPattern("dd/MM"));
+    }
+
     private List<TimeLuck> generateTimeLuckList() {
         List<TimeLuck> timeLuckList = new ArrayList<>();
-        int[] hours = {23, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21}; // Giờ bắt đầu
+        int[] hours = {23, 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21}; // Start hours
 
-        for (int i = 0; i < hours.length; i++) {
-            int startHour = hours[i];
-            int endHour = hours[(i + 1) % hours.length];
-            // Tính toán dựa trên ngày âm lịch
+        for (int startHour : hours) {
+            int endHour = (startHour + 2) % 24;
             int overallScore = LuckCalculator.overallLuckScoreCalculator(lunarDay, lunarMonth, startHour);
             String color = LuckCalculator.getLuckColor(overallScore);
             String detailedInfo = LuckCalculator.getDetailedLuckInfo(lunarDay, lunarMonth, startHour);
