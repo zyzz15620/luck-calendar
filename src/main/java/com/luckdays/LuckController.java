@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 public class LuckController {
-    @Value("classpath:tooltip.txt")
+    @Value("classpath:helpInfo.txt")
     private org.springframework.core.io.Resource tooltipFile;
 
     @GetMapping("/")
@@ -35,9 +35,9 @@ public class LuckController {
         List<DayLuck> calendar = generateCalendar(days, startDate);
         List<String> lunarDates = updateLunarDates(calendar);
 
-        String tooltipText = loadTooltipText();
+        String helpInfo = loadTxtFile();
 
-        model.addAttribute("tooltipText", tooltipText);
+        model.addAttribute("helpInfo", helpInfo);
         model.addAttribute("calendar", calendar);
         model.addAttribute("startDate", formatDate(startDate));
         model.addAttribute("endDate", formatDate(endDate));
@@ -76,9 +76,9 @@ public class LuckController {
         return lunarDates;
     }
 
-    private String loadTooltipText() {
+    private String loadTxtFile() {
         try {
-            ClassPathResource resource = new ClassPathResource("tooltip.txt");
+            ClassPathResource resource = new ClassPathResource("helpInfo.txt");
             return new String(Files.readAllBytes(resource.getFile().toPath()));
         } catch (IOException e) {
             e.printStackTrace();
