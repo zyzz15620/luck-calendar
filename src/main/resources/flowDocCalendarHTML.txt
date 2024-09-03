@@ -1,0 +1,60 @@
+### Flow Document for `calendar.html`
+
+#### 1. **HTML Structure and Layout**
+- **DOCTYPE Declaration**: Specifies the document type and version of HTML.
+- **HTML Tag**: Root element of the HTML document.
+- **Head Section**: Contains metadata, title, and link to CSS stylesheet.
+- **Body Section**: Contains the main content of the page.
+
+#### 2. **Tooltip**
+- **Tooltip Div**: Displays a tooltip with information.
+  - `div.tooltip`: Container for the tooltip.
+  - `span.tooltiptext`: Contains the tooltip text, populated with `tooltipText` from the model.
+
+#### 3. **Header**
+- **Header Section**: Displays the title and current month/year.
+  - `header.header`: Container for the header.
+  - `h1.centered`: Main title "Luck Calendar".
+  - `h2.centered`: Displays the current month and year using `calendar[0].month` and `calendar[0].year`.
+
+#### 4. **Navigation**
+- **Navigation Section**: Allows navigation between different date ranges.
+  - `div.navigation.centered`: Container for navigation links.
+  - `a.nav-arrow`: Links to previous and next date ranges using `days` and `offset` parameters.
+  - `span`: Displays the current date range using `startDate` and `endDate`.
+
+#### 5. **Calendar Table**
+- **Table Container**: Contains the calendar table.
+  - `div.table-container`: Container for the table.
+  - `table.calendar-table`: Main table element.
+
+  **Table Header**:
+  - `thead`: Contains the table header.
+  - `tr`: Table row for headers.
+  - `th`: Table headers for each day, displaying day of the week, date, and lunar date using `calendar` and `lunarDates`.
+
+  **Table Body**:
+  - `tbody`: Contains the table body.
+  - `tr`: Table rows for each time slot.
+  - `td`: Table data cells for each time slot and day.
+    - Displays formatted time using `calendar[0].timeLuckList[timeIndex].formattedTime`.
+    - Background color set based on `dayLuck.timeLuckList[timeIndex].color`.
+    - Contains detailed luck information using `dayLuck.timeLuckList[timeIndex].detailedInfo`.
+
+#### 6. **Thymeleaf Expressions**
+- **Thymeleaf Attributes**: Used to dynamically populate content.
+  - `th:href`: Sets the href attribute for navigation links.
+  - `th:text`: Sets the text content for elements.
+  - `th:utext`: Sets the unescaped text content for elements.
+  - `th:each`: Iterates over collections to generate repeated content.
+  - `th:style`: Sets the style attribute dynamically.
+
+#### 7. **Model Attributes**
+- **Model Data**: Data passed from the controller to the view.
+  - `tooltipText`: Text for the tooltip.
+  - `calendar`: List of `DayLuck` objects representing each day.
+  - `startDate` and `endDate`: Start and end dates of the current range.
+  - `offset`: Offset for pagination.
+  - `lunarDates`: List of lunar dates corresponding to each day.
+
+This document outlines the structure and flow of the `calendar.html` file, explaining how it dynamically generates a calendar view using Thymeleaf and data from the model.

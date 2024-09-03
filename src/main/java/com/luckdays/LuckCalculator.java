@@ -11,23 +11,15 @@ public class LuckCalculator {
     }
 
     private static int luckScore(String status) {
-        switch (status) {
-            case "Đại An":
-                return 3;
-            case "Tốc Hỉ":
-                return 2;
-            case "Tiểu Cát":
-            case "Lưu Niên":
-                return 1;
-            case "Xích Khẩu":
-                return -2;
-            case "Không Vong":
-                return -3;
-            default:
-                return 0;
-        }
+        return switch (status) {
+            case "Đại An" -> 3;
+            case "Tốc Hỉ" -> 2;
+            case "Tiểu Cát", "Lưu Niên" -> 1;
+            case "Xích Khẩu" -> -2;
+            case "Không Vong" -> -3;
+            default -> 0;
+        };
     }
-
 
     private static String getMonthStatus(int month) {
         return statusArray[(month - 1) % 6];

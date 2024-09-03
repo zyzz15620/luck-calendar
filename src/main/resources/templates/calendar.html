@@ -3,10 +3,19 @@
 <head>
     <title>Luck Calendar</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <script>
+        function updateDays() {
+            const days = document.getElementById('days').value;
+            const offset = document.getElementById('offset').value;
+            if (days) {
+                window.location.href = `/calendar?days=${days}&offset=${offset}`;
+            }
+        }
+    </script>
 </head>
 <body>
 <!-- Tooltip -->
-<div class="tooltip">!
+<div class="tooltip">
     <span class="tooltiptext" th:utext="${tooltipText}"></span>
 </div>
 
@@ -21,6 +30,17 @@
     <a class="nav-arrow" th:href="@{/calendar(days=${days}, offset=${offset - 1})}">&larr;</a>
     <span th:text="${startDate} + ' - ' + ${endDate}"></span>
     <a class="nav-arrow" th:href="@{/calendar(days=${days}, offset=${offset + 1})}">&rarr;</a>
+</div>
+
+<!-- Hien thi so ngay -->
+<div class="centered">
+    <label for="days">Chế độ xem:</label>
+    <select name="days" id="days" onchange="updateDays()">
+        <option value="" disabled selected>Chọn số ngày</option>
+        <option value="4" th:selected="${days == 4}">4 ngày</option>
+        <option value="7" th:selected="${days == 7}">7 ngày</option>
+    </select>
+    <input type="hidden" id="offset" th:value="${offset}">
 </div>
 
 <!-- Bảng lịch -->
