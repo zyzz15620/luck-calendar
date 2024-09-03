@@ -15,6 +15,7 @@ public class LuckCalendarApplication extends SpringBootServletInitializer {
 		SpringApplication.run(LuckCalendarApplication.class, args);
 	}
 
+
 	@Bean
 	public ServletWebServerFactory servletContainer() {
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory();
