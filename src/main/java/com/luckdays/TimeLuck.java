@@ -12,24 +12,19 @@ public class TimeLuck {
         this.endHour = endHour;
         this.detailedInfo = detailedInfo;
         this.color = color;
-        this.colorClass = getColorClass(); // Tạo class dựa trên màu
+        this.colorClass = determineColorClass(color);
     }
-    public String getColorClass() {
-        if (this.color.equals("#8B0000")) {
-            return "red-dark";
-        } else if (this.color.equals("#DC143C")) {
-            return "red";
-        } else if (this.color.equals("#FF7F7F")) {
-            return "red-light";
-        } else if (this.color.equals("#F0E68C")) {
-            return "yellow";
-        } else if (this.color.equals("#90EE90")) {
-            return "green-light";
-        } else if (this.color.equals("#3CB371")) {
-            return "green";
-        } else {
-            return "green-dark";
-        }
+
+    private String determineColorClass(String color) {
+        return switch (color) {
+            case "#8B0000" -> "red-dark";
+            case "#DC143C" -> "red";
+            case "#FF7F7F" -> "red-light";
+            case "#F0E68C" -> "yellow";
+            case "#90EE90" -> "green-light";
+            case "#3CB371" -> "green";
+            default -> "green-dark";
+        };
     }
 
     public int getStartHour() {
@@ -46,6 +41,10 @@ public class TimeLuck {
 
     public String getColor() {
         return color;
+    }
+
+    public String getColorClass() {
+        return colorClass;
     }
 
     public String getFormattedTime() {
