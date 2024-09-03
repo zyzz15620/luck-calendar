@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="icon" type="image/x-icon" th:href="@{/xemngayFavicon.ico}">
     <title>Luck Calendar</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <script>
@@ -21,6 +22,7 @@
 
 <!-- Tiêu đề -->
 <header class="header">
+    <img th:src="@{/xemngayLogo.png}" alt="Logo" class="logo">
     <h1 class="centered">Luck Calendar</h1>
     <h2 class="centered">Tháng: <span th:text="${calendar[0].month}"></span>/<span th:text="${calendar[0].year}"></span></h2>
 </header>
