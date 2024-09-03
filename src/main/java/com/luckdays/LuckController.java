@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -30,55 +29,65 @@ public class LuckController {
                               @RequestParam(defaultValue = "0") int offset,
                               Model model) {
 
-        LocalDate baseDate = LocalDate.now();
-        LocalDate startDate = baseDate.plusDays((long) offset * days);
+        LocalDate startDate = calculateStartDate(days, offset);
         LocalDate endDate = startDate.plusDays(days - 1);
 
-        String formattedStartDate = startDate.format(DateTimeFormatter.ofPattern("dd/MM"));
-        String formattedEndDate = endDate.format(DateTimeFormatter.ofPattern("dd/MM"));
+        List<DayLuck> calendar = generateCalendar(days, startDate);
+        List<String> lunarDates = updateLunarDates(calendar);
 
-        List<DayLuck> calendar = generateCalendar(days, startDate.getDayOfMonth(), startDate.getMonthValue(), startDate.getYear());
-        List<String> lunarDates = new ArrayList<>();
-
-        for (DayLuck dayLuck : calendar) {
-            int[] lunarDate = LunarUtils.convertSolar2Lunar(dayLuck.getDay(), dayLuck.getMonth(), dayLuck.getYear(), 7.0);
-            String lunarDateString = lunarDate[0] + "/" + lunarDate[1];
-            lunarDates.add(lunarDateString);
-
-            // Cập nhật lunarDay và lunarMonth trong DayLuck
-            dayLuck.setLunarDay(lunarDate[0]);
-            dayLuck.setLunarMonth(lunarDate[1]);
-        }
-
-        String tooltipText = "";
-        try {
-            ClassPathResource resource = new ClassPathResource("tooltip.txt");
-            tooltipText = new String(Files.readAllBytes(resource.getFile().toPath()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        String tooltipText = loadTooltipText();
 
         model.addAttribute("tooltipText", tooltipText);
         model.addAttribute("calendar", calendar);
-        model.addAttribute("startDate", formattedStartDate);
-        model.addAttribute("endDate", formattedEndDate);
+        model.addAttribute("startDate", formatDate(startDate));
+        model.addAttribute("endDate", formatDate(endDate));
         model.addAttribute("offset", offset);
         model.addAttribute("lunarDates", lunarDates);
 
         return "calendar";
     }
 
-    private List<DayLuck> generateCalendar(int days, int startDay, int month, int year) {
+    private LocalDate calculateStartDate(int days, int offset) {
+        LocalDate baseDate = LocalDate.now();
+        return baseDate.plusDays((long) offset * days);
+    }
+
+    private List<DayLuck> generateCalendar(int days, LocalDate startDate) {
         List<DayLuck> calendar = new ArrayList<>();
         for (int i = 0; i < days; i++) {
-            LocalDate date = LocalDate.of(year, month, startDay).plusDays(i);
+            LocalDate date = startDate.plusDays(i);
             String dayOfWeek = getDayOfWeek(date);
             int[] lunarDate = LunarUtils.convertSolar2Lunar(date.getDayOfMonth(), date.getMonthValue(), date.getYear(), 7.0);
             DayLuck dayLuck = new DayLuck(date.getDayOfMonth(), date.getMonthValue(), date.getYear(), lunarDate[0], lunarDate[1], dayOfWeek);
             calendar.add(dayLuck);
         }
         return calendar;
+    }
+
+    private List<String> updateLunarDates(List<DayLuck> calendar) {
+        List<String> lunarDates = new ArrayList<>();
+        for (DayLuck dayLuck : calendar) {
+            int[] lunarDate = LunarUtils.convertSolar2Lunar(dayLuck.getDay(), dayLuck.getMonth(), dayLuck.getYear(), 7.0);
+            String lunarDateString = lunarDate[0] + "/" + lunarDate[1];
+            lunarDates.add(lunarDateString);
+            dayLuck.setLunarDay(lunarDate[0]);
+            dayLuck.setLunarMonth(lunarDate[1]);
+        }
+        return lunarDates;
+    }
+
+    private String loadTooltipText() {
+        try {
+            ClassPathResource resource = new ClassPathResource("tooltip.txt");
+            return new String(Files.readAllBytes(resource.getFile().toPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    private String formatDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM"));
     }
 
     private String getDayOfWeek(LocalDate date) {
