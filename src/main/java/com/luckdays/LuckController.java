@@ -28,6 +28,17 @@ public class LuckController {
     public LuckController(ResourceLoader resourceLoader) {
         this.resourceLoader = resourceLoader;
     }
+    @GetMapping("/about")
+    public String about(Model model) {
+        model.addAttribute("activePage","about");
+        return "about";
+    }
+
+    @GetMapping("/contact")
+    public String contact(Model model) {
+        model.addAttribute("activePage","contact");
+        return "contact";
+    }
 
     @GetMapping("/")
     public String rootRedirect() {
