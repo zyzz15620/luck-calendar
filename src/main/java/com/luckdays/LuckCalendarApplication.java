@@ -1,5 +1,6 @@
 package com.luckdays;
 
+import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
@@ -24,5 +25,9 @@ public class LuckCalendarApplication extends SpringBootServletInitializer {
 			tomcat.setPort(Integer.parseInt(port));
 		}
 		return tomcat;
+	}
+	@Bean
+	public LayoutDialect layoutDialect() {
+		return new LayoutDialect();
 	}
 }
