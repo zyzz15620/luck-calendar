@@ -1,25 +1,33 @@
 package com.luckdays;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class LuckController {
-    @Value("classpath:helpInfo.txt")
-    private org.springframework.core.io.Resource tooltipFile;
+
+    private final ResourceLoader resourceLoader;
+
+    public LuckController(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
 
     @GetMapping("/")
     public String rootRedirect() {
@@ -82,11 +90,13 @@ public class LuckController {
 
     private String loadTxtFile() {
         try {
-            ClassPathResource resource = new ClassPathResource("helpInfo.txt");
-            return new String(Files.readAllBytes(resource.getFile().toPath()));
+            Resource resource = resourceLoader.getResource("classpath:helpInfo.txt");
+            InputStream inputStream = resource.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            return reader.lines().collect(Collectors.joining("\n"));
         } catch (IOException e) {
             e.printStackTrace();
-            return "";
+            return "failed to load txt file";
         }
     }
 
