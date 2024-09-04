@@ -51,7 +51,7 @@
             <th th:each="dayLuck, iter : ${calendar}">
                 <span th:text="${dayLuck.dayOfWeek}"></span><br>
                 <span th:text="${dayLuck.day + '/' + dayLuck.month}"></span><br>
-                <span>Âm lịch:</span> <span th:text="${lunarDates[iter.index]}"></span>/<span th:text="${calendar[0].year}"></span>
+                <span>Âm lịch:</span> <span th:text="${lunarDates[iter.index]}"></span>
             </th>
         </tr>
         </thead>
