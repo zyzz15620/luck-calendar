@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +50,7 @@ public class LuckController {
     }
 
     private LocalDate calculateStartDate(int days, int offset) {
-        LocalDate baseDate = LocalDate.now();
+        LocalDate baseDate = LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh"));
         return baseDate.plusDays((long) offset * days);
     }
 
