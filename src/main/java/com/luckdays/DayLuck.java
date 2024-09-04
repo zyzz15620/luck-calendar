@@ -3,6 +3,7 @@ package com.luckdays;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DayLuck {
@@ -51,6 +52,9 @@ public class DayLuck {
             timeLuckList.add(new TimeLuck(startHour, endHour, detailedInfo, color));
         }
         return timeLuckList;
+    }
+    public static List<Integer> getCustomSequence() {
+        return Arrays.asList(3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2);
     }
 
     public int getDay() {

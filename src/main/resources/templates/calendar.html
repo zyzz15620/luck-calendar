@@ -57,7 +57,7 @@
         </thead>
         <!-- Body -->
         <tbody>
-        <tr th:each="timeIndex : ${#numbers.sequence(0, 11)}">
+        <tr th:each="timeIndex : ${customSequence}">
             <td th:text="${calendar[0].timeLuckList[timeIndex].formattedTime}"></td>
             <td th:each="dayLuck : ${calendar}" th:style="'background-color: ' + ${dayLuck.timeLuckList[timeIndex].color}">
                 <div class="day-box">

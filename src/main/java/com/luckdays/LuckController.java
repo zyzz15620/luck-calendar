@@ -46,6 +46,7 @@ public class LuckController {
         model.addAttribute("days", days);
         model.addAttribute("offset", offset);
         model.addAttribute("lunarDates", lunarDates);
+        model.addAttribute("customSequence", DayLuck.getCustomSequence());
 
         return "calendar";
     }
