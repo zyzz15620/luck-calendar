@@ -46,7 +46,7 @@ public class DayLuck {
 
         for (int startHour : hours) {
             int endHour = (startHour + 2) % 24;
-            int overallScore = LuckCalculator.overallLuckScoreCalculator(lunarDay, lunarMonth, startHour);
+            double overallScore = LuckCalculator.overallLuckScoreCalculator(lunarDay, lunarMonth, startHour);
             String color = LuckCalculator.getLuckColor(overallScore);
             String detailedInfo = LuckCalculator.getDetailedLuckInfo(lunarDay, lunarMonth, startHour);
             timeLuckList.add(new TimeLuck(startHour, endHour, detailedInfo, color));
