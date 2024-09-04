@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/fragments/layouts/base_layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" class="h-100">
 <head>
+    <meta charset="UTF-8">
     <title>About</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" th:href="@{/xemNgayFavicon.ico}"/>
+
 </head>
 <body class="d-flex flex-column h-100">
-<section layout:fragment="content">
-
-    <main role="main" class="flex-shrink-0">
-        <div class="container mt-5">
-            <div class="jumbotron">
-                <h1 class="display-4">About Us</h1>
-                <p>This is the About page. More content will be added here later.</p>
-            </div>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main role="main" class="flex-shrink-0">
+    <div class="container mt-5">
+        <div class="jumbotron">
+            <h1 class="display-4">About Us</h1>
+            <p>This is the About page. More content will be added here later.</p>
         </div>
-    </main>
-
-</section>
+    </div>
+</main>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

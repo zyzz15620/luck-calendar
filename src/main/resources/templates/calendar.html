@@ -1,74 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/fragments/layouts/base_layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Luck Calendar</title>
-</head>
-<body>
-
-<section layout:fragment="content">
-    <!-- Tiêu đề -->
-    <header class="header">
-        <img th:src="@{/xemngayLogo.png}" alt="Logo" class="logo">
-        <h1 class="centered">Luck Calendar</h1>
-        <h2 class="centered">Tháng: <span th:text="${calendar[0].month}"></span>/<span th:text="${calendar[0].year}"></span></h2>
-    </header>
-    <!-- Điều hướng -->
-    <div class="navigation centered">
-        <a class="nav-arrow" th:href="@{/calendar(days=${days}, offset=${offset - 1})}">&larr;</a>
-        <span th:text="${startDate} + ' - ' + ${endDate}"></span>
-        <a class="nav-arrow" th:href="@{/calendar(days=${days}, offset=${offset + 1})}">&rarr;</a>
-    </div>
-    <!-- Hien thi so ngay -->
-    <div class="centered">
-        <label for="days">Chế độ xem:</label>
-        <select name="days" id="days" onchange="updateDays()">
-            <option value="" disabled selected>Chọn số ngày</option>
-            <option value="4" th:selected="${days == 4}">4 ngày</option>
-            <option value="7" th:selected="${days == 7}">7 ngày</option>
-        </select>
-        <input type="hidden" id="offset" th:value="${offset}">
-    </div>
-    <!-- Bảng lịch -->
-    <div class="table-container">
-        <table class="calendar-table">
-            <!-- Header -->
-            <thead>
-            <tr>
-                <th>Giờ</th>
-                <th th:each="dayLuck, iter : ${calendar}">
-                    <span th:text="${dayLuck.dayOfWeek}"></span><br>
-                    <span th:text="${dayLuck.day + '/' + dayLuck.month}"></span><br>
-                    <span>Âm lịch:</span> <span th:text="${lunarDates[iter.index]}"></span>
-                </th>
-            </tr>
-            </thead>
-            <!-- Body -->
-            <tbody>
-            <tr th:each="timeIndex : ${customSequence}">
-                <td th:text="${calendar[0].timeLuckList[timeIndex].formattedTime}"></td>
-                <td th:each="dayLuck : ${calendar}" th:style="'background-color: ' + ${dayLuck.timeLuckList[timeIndex].color}">
-                    <div class="day-box">
-                        <span th:utext="${dayLuck.timeLuckList[timeIndex].detailedInfo}"></span>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- Help Button -->
-    <button id="helpButton">Trợ giúp</button>
-    <!-- Help Modal -->
-    <div id="helpModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p th:utext="${helpInfo}"></p>
-        </div>
-    </div>
-
-
-    <!-- JavaScript to handle days dropdown -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" th:href="@{/xemNgayFavicon.ico}"/>
     <script>
         function updateDays() {
             const days = document.getElementById('days').value;
@@ -78,29 +15,92 @@
             }
         }
     </script>
-    <!-- JavaScript to handle modal -->
-    <script>
-        // Get the modal
-        var modal = document.getElementById("helpModal");
-        // Get the button that opens the modal
-        var btn = document.getElementById("helpButton");
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        // When the user clicks the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<!-- Tiêu đề -->
+<header class="header">
+    <img th:src="@{/xemngayLogo.png}" alt="Logo" class="logo">
+    <h1 class="centered">Luck Calendar</h1>
+    <h2 class="centered">Tháng: <span th:text="${calendar[0].month}"></span>/<span th:text="${calendar[0].year}"></span></h2>
+</header>
+<!-- Điều hướng -->
+<div class="navigation centered">
+    <a class="nav-arrow" th:href="@{/calendar(days=${days}, offset=${offset - 1})}">&larr;</a>
+    <span th:text="${startDate} + ' - ' + ${endDate}"></span>
+    <a class="nav-arrow" th:href="@{/calendar(days=${days}, offset=${offset + 1})}">&rarr;</a>
+</div>
+<!-- Hien thi so ngay -->
+<div class="centered">
+    <label for="days">Chế độ xem:</label>
+    <select name="days" id="days" onchange="updateDays()">
+        <option value="" disabled selected>Chọn số ngày</option>
+        <option value="4" th:selected="${days == 4}">4 ngày</option>
+        <option value="7" th:selected="${days == 7}">7 ngày</option>
+    </select>
+    <input type="hidden" id="offset" th:value="${offset}">
+</div>
+<!-- Bảng lịch -->
+<div class="table-container">
+    <table class="calendar-table">
+        <!-- Header -->
+        <thead>
+        <tr>
+            <th>Giờ</th>
+            <th th:each="dayLuck, iter : ${calendar}">
+                <span th:text="${dayLuck.dayOfWeek}"></span><br>
+                <span th:text="${dayLuck.day + '/' + dayLuck.month}"></span><br>
+                <span>Âm lịch:</span> <span th:text="${lunarDates[iter.index]}"></span>
+            </th>
+        </tr>
+        </thead>
+        <!-- Body -->
+        <tbody>
+        <tr th:each="timeIndex : ${customSequence}">
+            <td th:text="${calendar[0].timeLuckList[timeIndex].formattedTime}"></td>
+            <td th:each="dayLuck : ${calendar}" th:style="'background-color: ' + ${dayLuck.timeLuckList[timeIndex].color}">
+                <div class="day-box">
+                    <span th:utext="${dayLuck.timeLuckList[timeIndex].detailedInfo}"></span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Help Button -->
+<button id="helpButton">Trợ giúp</button>
+<!-- Help Modal -->
+<div id="helpModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p th:utext="${helpInfo}"></p>
+    </div>
+</div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<!-- JavaScript to handle modal -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Get the modal
+    var modal = document.getElementById("helpModal");
+    // Get the button that opens the modal
+    var btn = document.getElementById("helpButton");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks the button, open the modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-</section>>
+    }
+</script>
 </body>
 </html>

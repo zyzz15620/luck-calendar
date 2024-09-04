@@ -26,8 +26,4 @@ public class LuckCalendarApplication extends SpringBootServletInitializer {
 		}
 		return tomcat;
 	}
-	@Bean
-	public LayoutDialect layoutDialect() {
-		return new LayoutDialect();
-	}
 }
