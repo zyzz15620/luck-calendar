@@ -43,6 +43,7 @@ public class LuckController {
         model.addAttribute("calendar", calendar);
         model.addAttribute("startDate", formatDate(startDate));
         model.addAttribute("endDate", formatDate(endDate));
+        model.addAttribute("days", days);
         model.addAttribute("offset", offset);
         model.addAttribute("lunarDates", lunarDates);
 
