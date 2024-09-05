@@ -64,7 +64,7 @@ public class LuckCalculator {
         return "Tháng: " + monthStatus +
                 "<br> Ngày: " + dayStatus +
                 "<br> Giờ: " + timeStatus +
-                "<br> Overall Score: " + overallScore;
+                "<br> Điểm: " + overallScore;
 //                "<br> Luck Color: " + luckColor;
     }
 }
