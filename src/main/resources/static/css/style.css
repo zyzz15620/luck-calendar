@@ -54,39 +54,18 @@ h2 {
     text-decoration: underline;
 }
 
-/* Định dạng bảng */
-.table-container {
-    overflow-x: auto;
+/* Định table */
+.table-bordered {
+    border: 2px solid black; /* Đường viền bên ngoài bảng màu đen */
 }
 
-.calendar-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 0 auto;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff; /* Nền trắng cho bảng */
-}
-
-.calendar-table th, .calendar-table td {
-    border: 1px solid #dee2e6;
-    padding: 15px;
-    text-align: center;
-}
-
-.calendar-table th {
-    background-color: #5a9bd3; /* Màu xanh nhạt hơn */
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.calendar-table td {
-    background-color: #f8f9fa; /* Màu xám nhạt cho ô bảng */
-    transition: background-color 0.3s ease;
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid black; /* Đường viền giữa các ô trong bảng màu đen */
 }
 
 .day-box {
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
     min-height: 80px;
     display: flex;
@@ -95,10 +74,13 @@ h2 {
     color: #343a40;
     font-weight: bold;
     font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-.calendar-table td:hover .day-box {
-    background-color: rgba(0, 0, 0, 0.05);
+.table-responsive {
+    overflow-x: auto;
 }
+
+
 
 

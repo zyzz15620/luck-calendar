@@ -3,29 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About</title>
+    <title>Giới Thiệu</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
     <link rel="icon" type="image/x-icon" th:href="@{/xemNgayFavicon.ico}"/>
-
 </head>
+
 <body class="d-flex flex-column h-100">
 <div th:replace="~{fragments/navigation :: navigation}"></div>
-
-
 
 <main role="main" class="flex-shrink-0">
     <div class="container mt-5">
         <div class="jumbotron">
-            <h1 class="display-4">About Us</h1>
-            <p>This is the About page. More content will be added here later.</p>
+            <h1 class="h3">Giới Thiệu</h1>
+            <p class="lead"><strong>Xemngay.online</strong> sử dụng phép Độn Lục Nhâm, một phương pháp bấm độn do Lý Thuần Phong phát minh nhằm dự đoán giờ/ngày tốt hoặc xấu khi khởi sự công việc. Một phần quan trọng của hệ thống Lục Nhâm đã bị thất truyền hoặc ít nhất là không còn được giữ nguyên trạng từ nguyên bản.</p>
+
+            <p>Vì tính tiện dụng và đơn giản của phép Độn Lục Nhâm nên <strong>Xemngay.online</strong> muốn phát triển lại cho người dùng một công cụ hữu ích để xem ngày giờ và đặt lịch hẹn, hoặc sử dụng công cụ này để củng cố thêm độ chính xác cho những phương pháp phong thủy khác.</p>
+
+            <h2 class="h4">Các công thức sử dụng tại xemngay.online</h2>
+            <h3 class="h5">1. Xem giờ để khởi sự (thời gian ngắn tầm 2 tiếng):</h3>
+            <ul>
+                <li>Đại An +3 (tốt)</li>
+                <li>Lưu Niên +1 (có thể tốt)</li>
+                <li>Tốc Hỉ +2 (tốt)</li>
+                <li>Xích Khẩu -2 (xấu)</li>
+                <li>Tiểu Cát +1 (tốt)</li>
+                <li>Không Vong -3 (xấu)</li>
+            </ul>
+
+            <p><strong>Điểm may mắn chung</strong> = ( quẻ tháng *0,2 + quẻ ngày *0,35 + quẻ giờ * 0,45 ) * 3,33</p>
+            <p>Điểm có tối thiểu và tối đa là -10 và 10 điểm</p>
+
+            <h4 class="h6">Ví dụ:</h4>
+            <p>7h ngày 2/8 âm lịch thì có: quẻ tháng là Lưu Niên, quẻ ngày là Tốc Hỉ, quẻ giờ là Đại An</p>
+            <p><strong>Điểm may mắn chung</strong> = ( 1*0,2 + 2*0,35 + 3*0,45 ) * 3,33 = 7,5 điểm.</p>
+
+            <h5 class="h6">Cách dùng:</h5>
+            <ul>
+                <li>Những giờ có điểm trên 7.5 hoặc dưới -6.5 là những giờ có độ chính xác cao nhất, là những cung giờ nên được chú ý, bởi vì nó thường hội tụ đủ quẻ tốt hoặc quẻ xấu.</li>
+                <li>Những cung giờ còn lại nên xem xét thêm mối tương quan giữa quẻ giờ và quẻ ngày để tăng thêm độ chính xác, hoặc kết hợp với phương pháp khác.</li>
+            </ul>
+
+            <h3 class="h5">2. Xem ngày để khởi sự (dài hơn 2 tiếng):</h3>
+            <p><i>*Đang trong giai đoạn phát triển*</i></p>
+
+            <p>Nếu bạn đọc có thông tin nguyên bản Độn Lục Nhâm của Lý Thuần Phong hoặc một trường phái khác, muốn đóng góp, xin vui lòng gửi về gmail: <a href="mailto:duc.total650@gmail.com">duc.total650@gmail.com</a></p>
         </div>
     </div>
 </main>
-
-
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>

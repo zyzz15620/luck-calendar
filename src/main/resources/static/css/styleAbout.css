@@ -1,0 +1,9 @@
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.25rem; /* Kích thước đồng đều */
+    margin-bottom: 1rem; /* Khoảng cách dưới tiêu đề */
+}
+
+.lead {
+    font-size: 1rem; /* Điều chỉnh kích thước chữ của đoạn văn chính */
+    font-weight: 400; /* Giữ chữ ở mức trung bình */
+}

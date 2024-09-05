@@ -73,11 +73,10 @@
     </div>
 </div>
 
-<!-- Bảng lịch -->
-<div class="table-container">
-    <table class="calendar-table">
+<div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
         <!-- Header -->
-        <thead>
+        <thead style="background-color: #5a9bd3; color: white;">
         <tr>
             <th>Giờ</th>
             <th th:each="dayLuck, iter : ${calendar}">
@@ -100,6 +99,8 @@
         </tbody>
     </table>
 </div>
+
+
 
 
 
