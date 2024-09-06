@@ -27,9 +27,10 @@ The main motivation behind this project was to create a practical and user-frien
 
 ## Future Developments
 While the current version provides a solid foundation, I have several ideas for extending its functionality:
-- **User Account Management**: To allow users to save preferred dates or times.
-- **Email Reminders**: Automated reminders for selected good times to take action.
-- **Mobile App**: Native iOS/Android versions using React Native or Flutter for better accessibility.
+- **View Good Days**: Allow users to view a summary of good days over a 30-day period without needing to check specific time slots.
+- **Print Feature**: Enable users to easily print the calendar for offline reference.
+- **Embed Option (iFrame)**: Provide an option for other websites to embed the luck calendar via an iframe, allowing broader access to its features.
+- **Mobile App**: Making a version for Android
 
 ## Conclusion
 I enjoyed every step of creating **xemngay.opnline**. It allowed me to merge my interests in web development and automation testing into a single cohesive project. While it is not yet fully complete, I intend to continue improving and expanding this project over time as I develop new skills.
