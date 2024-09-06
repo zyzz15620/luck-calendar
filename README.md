@@ -8,6 +8,10 @@ The project is built using **Java Spring Boot**, **Thymeleaf**, and **Bootstrap 
 ## Motivation & Learning Outcomes
 The main motivation behind this project was to create a practical and user-friendly tool while sharpening my technical skills. Additionally, this project allowed me to explore the complexities of designing a fully functional web application while simultaneously preparing for challenges in **automation testing**.
 
+### My Phylosophy When Making this Project
+1. Luck is crucial. I don’t need to know if checking dates and times really matters, but I see it as a small investment with the potential for a huge upside if it’s true.
+2. I see an automation tester as a developer with deep knowledge of testing, not just a tester who can code. That's why I ventured into building this web project
+
 ### Key Learning Points:
 1. **Debugging and Problem Solving**: This project wasn’t simple. I encountered numerous bugs that required deep debugging sessions, particularly during the process of converting solar dates to lunar dates. This experience has helped me gain a better understanding of how to test and pinpoint issues efficiently.
    
